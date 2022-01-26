@@ -1,0 +1,19 @@
+{
+  "name": "testapi",
+  "version": "1.0.0",
+  "description": "testapi",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon server.js"
+  },
+  "author": "enes",
+  "license": "ISC",
+  "devDependencies": {
+    "nodemon": "^2.0.15"
+  },
+  "dependencies": {
+    "express": "^4.17.2",
+    "swagger-ui-express": "^4.3.0"
+  }
+}
