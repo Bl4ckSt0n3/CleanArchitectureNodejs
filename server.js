@@ -1,8 +1,10 @@
 var express = require('express'),
     app = express(),
     port = process.env.PORT || 3000,
-    bodyParser = require('body-parser'),
-    model = require('./api/models/testModel');
+    bodyParser = require('body-parser');
+
+const serviceLocator = require('./infrastructure/servicelocator');
+
     
 // https://levelup.gitconnected.com/how-to-add-swagger-ui-to-existing-node-js-and-express-js-project-2c8bad9364ce
 const swaggerUi = require('swagger-ui-express'),
@@ -20,13 +22,19 @@ app.use(
     swaggerUi.setup(swaggerDocument)
 );
 
+app.set('serviceLocator', serviceLocator);
 
 
-var routes = require('./api/routes/testRoute');
-var userRoutes = require('./api/routes/userRoutes');
+const routes = require('./api/routes/userRoutes');
+app.use('/api', routes(app.get('serviceLocator')));
 
-routes(app);
-userRoutes(app);
+
+
+// var routes = require('./api/routes/testRoute');
+// const userRoutes = require('./api/routes/userRoutes');
+
+// routes(app);
+// userRoutes(app);
 
 app.listen(port);
 
