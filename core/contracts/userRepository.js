@@ -18,7 +18,7 @@ module.exports = class {
         throw new Error('not implemented');
     }
 
-    delete(personId) {
+    delete(request) {
         throw new Error('not implemented');
     }
 

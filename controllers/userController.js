@@ -13,25 +13,43 @@
 //     }
 // }
 
-const LoginHandler = require('../core/handlers/loginUserHandler')
-const UserResponse = require('../core/dtos/responses/read/responseDto');
-const UserHandler = require('../core/handlers/createUserHandler');
+const Response = require('../core/dtos/responses/read/responseDto');
+
+// handlers
+const CreateUser = require('../core/usecases/createUserUsecase');
+const GetUser = require('../core/usecases/getUserUsecase');
+const DeleteUser = require('../core/usecases/deleteUserUsecase');
+const Login = require('../core/usecases/loginUserUsecase');
 
 module.exports = class UserController {
 
     constructor(userRepository) {
-        this.userRepository = userRepository; // delete it
+        this.userRepository = userRepository;
     }
 
-    // async login(req) {
-    //     var response = await LoginHandler(req);
-
-    // }
 
     async createUser(req) {
-        var response = await UserHandler(req, this.userRepository);
-        if (response == null) return new UserResponse("bad request", null, 400);
-        return new UserResponse("created", response, 200);
+        var response = await CreateUser(req, this.userRepository);
+        if (response == null) return new Response("bad request", null, 400);
+        return new Response("created", response, 200);
     } 
+
+    async getUser() {
+        var response = await GetUser(this.userRepository);
+        if (response == null) return new Response("bad request", null, 400);
+        return new Response("read", response, 200);
+    }
+
+    async deleteUser(req) {
+        var response = await DeleteUser(req, this.userRepository);
+        if (response == null) return new Response("bad request", null, 400);
+        return new Response("deleted", response, 200);
+    }
+
+    async login(req) {
+        var response = await Login(req, this.userRepository);
+        if(response == null) return new Response("bad request", null, 400);
+        return new Response("deleted")
+    }
     
 }
