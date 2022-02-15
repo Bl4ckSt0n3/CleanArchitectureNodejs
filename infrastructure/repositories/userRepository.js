@@ -4,6 +4,7 @@
 const UserRepository = require('../../core/contracts/userRepository');
 const CreateUserResponse = require('../../core/dtos/responses/read/getUserDto');
 const DeleteUserResponse = require('../../core/dtos/requests/delete/deleteUserDto');
+const UpdateUserResponse = require('../../core/dtos/responses/read/getUserDto');
 const Response = require('../../core/dtos/responses/read/responseDto');
 
 module.exports = class extends UserRepository {
@@ -28,6 +29,11 @@ module.exports = class extends UserRepository {
             person.firstName,
             person.lastName
         )
+        return res;
+    }
+
+    async update(request) {
+        var res = await new UpdateUserResponse(request.id, request.firstName, request.lastName, request.email);
         return res;
     }
 

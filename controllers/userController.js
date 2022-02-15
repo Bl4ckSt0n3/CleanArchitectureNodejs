@@ -18,6 +18,7 @@ const Response = require('../core/dtos/responses/read/responseDto');
 // handlers
 const CreateUser = require('../core/usecases/createUserUsecase');
 const GetUser = require('../core/usecases/getUserUsecase');
+const UpdateUser = require('../core/usecases/updateUserUsecase');
 const DeleteUser = require('../core/usecases/deleteUserUsecase');
 const Login = require('../core/usecases/loginUserUsecase');
 
@@ -38,6 +39,12 @@ module.exports = class UserController {
         var response = await GetUser(this.userRepository);
         if (response == null) return new Response("bad request", null, 400);
         return new Response("read", response, 200);
+    }
+
+    async updateUser(req) {
+        var response = await UpdateUser(req, this.userRepository);
+        if (response == null) return new Response("Bad Request", null, 400);
+        return new Response("updated", response, 200);
     }
 
     async deleteUser(req) {

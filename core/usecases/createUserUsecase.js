@@ -1,3 +1,4 @@
+'use strict';
 const CreateUserDto = require('../dtos/requests/create/createUserDto');
 
 module.exports = (request, userRepository) => {

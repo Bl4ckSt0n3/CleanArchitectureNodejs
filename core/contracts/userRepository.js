@@ -14,7 +14,7 @@ module.exports = class {
         throw new Error('not implemented');
     }
 
-    update(personId, request) {
+    update(request) {
         throw new Error('not implemented');
     }
 

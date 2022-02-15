@@ -34,6 +34,12 @@ const usersRouter = ({ userRepository }) => {
             res.status(result.statusCode).send(result);
         });
 
+    router.route('/user/update_user')
+        .put(async function (req, res) {
+            var result = await userController.updateUser(req.body);
+            res.status(result.statusCode).send(result);
+        });
+
     router.route('/user/delete_user')
         .delete(async function (req, res) {
             var result = await userController.deleteUser(req.body);
