@@ -1,7 +1,12 @@
 'use strict';
+
+const bcrypt = require('bcrypt');
 const CreateUserDto = require('../dtos/requests/create/createUserDto');
 
-module.exports = (request, userRepository) => {
+module.exports = async (request, userRepository) => {
+
+    const salt = await bcrypt.genSalt(10);
+    const hashedPassword = await bcrypt.hash(request.password, salt);
 
     return userRepository.create(
         new CreateUserDto(
@@ -9,7 +14,12 @@ module.exports = (request, userRepository) => {
             request.firstName,
             request.lastName,
             request.email,
-            request.password
+            hashedPassword,
+            request.phone,
+            request.country,
+            request.city,
+            request.state,
+            request.zip
         )
     );
 };

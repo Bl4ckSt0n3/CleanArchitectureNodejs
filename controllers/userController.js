@@ -13,6 +13,7 @@
 //     }
 // }
 
+
 const Response = require('../core/dtos/responses/read/responseDto');
 
 // handlers
@@ -28,7 +29,7 @@ module.exports = class UserController {
         this.userRepository = userRepository;
     }
 
-
+    
     async createUser(req) {
         var response = await CreateUser(req, this.userRepository);
         if (response == null) return new Response("bad request", null, 400);
@@ -53,10 +54,10 @@ module.exports = class UserController {
         return new Response("deleted", response, 200);
     }
 
-    async login(req) {
-        var response = await Login(req, this.userRepository);
-        if(response == null) return new Response("bad request", null, 400);
-        return new Response("deleted")
-    }
+    // async login(req) {
+    //     var response = await Login(req, this.userRepository);
+    //     if(response == null) return new Response("bad request", null, 400);
+    //     return new Response("login", response, 200);
+    // }
     
 }
