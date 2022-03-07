@@ -10,7 +10,7 @@ const productsRouter = ({productRepository}) => {
     const productController = new ProductController(productRepository);
 
     router.route('/:cardTitle')
-        .get(auth, removeHeader, async function(req, res) {
+        .get(removeHeader, async function(req, res) {
             var result = await productController.getProduct(req.params.cardTitle);
             res.status(result.statusCode).send(result)
         });
